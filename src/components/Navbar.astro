@@ -1,0 +1,70 @@
+---
+import LogoMark from '@/components/LogoMark.astro';
+
+const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+const nav = [
+  { href: '/#features', label: 'Features' },
+  { href: '/#trust', label: 'Trust' },
+  { href: '/#pricing', label: 'Pricing' },
+];
+---
+
+<header class="fixed top-0 z-50 w-full px-4 pt-4 md:px-6">
+  <nav
+    class="glass-nav mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl px-4 py-3 md:px-6"
+    aria-label="Primary"
+  >
+    <a href="/" class="group flex shrink-0 items-center gap-2.5 text-surface-900 no-underline">
+      <LogoMark class="h-9 w-9 shrink-0" variant="dark" />
+      <span class="text-[17px] font-medium tracking-tight">TradePulse</span>
+    </a>
+
+    <ul class="hidden list-none items-center gap-8 md:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-[15px] font-normal tracking-tight text-muted transition-colors duration-200 hover:text-surface-900"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hidden items-center gap-3 md:flex">
+      <a href={signupHref} class="btn-primary text-sm"> Start for free </a>
+    </div>
+
+    <details class="relative md:hidden">
+      <summary
+        class="list-none cursor-pointer rounded-full border border-surface-200 bg-white/90 px-4 py-2 text-sm font-medium text-surface-900 [&::-webkit-details-marker]:hidden"
+      >
+        Menu
+      </summary>
+      <div
+        class="absolute right-0 mt-2 w-52 overflow-hidden rounded-2xl border border-surface-200/80 bg-white/95 py-2 shadow-lg backdrop-blur-xl"
+      >
+        <ul class="list-none p-2">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block rounded-xl px-3 py-2 text-[15px] text-surface-900 hover:bg-surface-100"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="border-t border-surface-200/80 p-2">
+          <a href={signupHref} class="btn-primary block w-full text-center text-sm"> Start for free </a>
+        </div>
+      </div>
+    </details>
+  </nav>
+</header>

@@ -1,0 +1,135 @@
+---
+const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+---
+
+<section
+  class="relative px-4 pb-24 pt-28 md:px-6 md:pb-32 md:pt-32"
+  aria-labelledby="hero-heading"
+  id="top"
+>
+  <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+    <div data-reveal>
+      <p class="text-sm font-medium tracking-wide text-brand-600">PulsePOS</p>
+      <h1 id="hero-heading" class="mt-3 text-balance text-4xl font-medium tracking-tight text-surface-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.05]">
+        Run your entire business with PulsePOS
+      </h1>
+      <p class="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted">
+        Inventory, sales, bookkeeping, staff, and insights — all in one system. A cloud POS and retail management
+        platform built for teams in Ghana and across Africa.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href={signupHref} class="btn-primary"> Start for free </a>
+        <a href="#demo" class="btn-secondary"> Watch demo </a>
+      </div>
+      <p class="mt-8 text-sm text-muted">
+        Trusted operations for small business POS and inventory workflows—without the clutter.
+      </p>
+    </div>
+
+    <div class="relative min-h-[420px] lg:min-h-[480px]" data-reveal>
+      <div
+        class="absolute inset-0 rounded-[2rem] border border-surface-200/90 bg-gradient-to-br from-white to-surface-100 shadow-[var(--shadow-soft)]"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="relative mx-auto mt-4 h-[min(420px,55vh)] w-full max-w-[520px] rounded-[1.75rem] border border-surface-200/80 bg-white/95 p-4 shadow-[var(--shadow-float)] backdrop-blur-sm lg:mt-0 lg:h-[440px]"
+      >
+        <div class="flex items-center justify-between border-b border-surface-200/60 pb-3">
+          <div class="flex gap-1.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-surface-200"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-surface-200"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-surface-200"></span>
+          </div>
+          <span class="text-xs font-medium tracking-wide text-muted">Dashboard</span>
+          <span class="w-8"></span>
+        </div>
+        <div class="mt-4 grid grid-cols-3 gap-3">
+          <div class="rounded-2xl bg-white/90 p-3 shadow-sm ring-1 ring-surface-200/60">
+            <p class="text-[11px] font-medium uppercase tracking-wide text-muted">Today</p>
+            <p class="mt-1 text-lg font-medium tracking-tight text-surface-900">₵ 12,480</p>
+            <p class="text-xs text-emerald-600">+8% vs yesterday</p>
+          </div>
+          <div class="rounded-2xl bg-white/90 p-3 shadow-sm ring-1 ring-surface-200/60">
+            <p class="text-[11px] font-medium uppercase tracking-wide text-muted">Orders</p>
+            <p class="mt-1 text-lg font-medium tracking-tight text-surface-900">142</p>
+            <p class="text-xs text-muted">checkout flow</p>
+          </div>
+          <div class="rounded-2xl bg-white/90 p-3 shadow-sm ring-1 ring-surface-200/60">
+            <p class="text-[11px] font-medium uppercase tracking-wide text-muted">Stock health</p>
+            <p class="mt-1 text-lg font-medium tracking-tight text-surface-900">94%</p>
+            <p class="text-xs text-muted">in sync</p>
+          </div>
+        </div>
+        <div class="relative mt-6 h-40 rounded-2xl bg-gradient-to-t from-brand-50/80 to-white ring-1 ring-brand-100/60">
+          <div class="absolute -left-4 top-6 w-[calc(100%+2rem)] sm:-left-6 sm:w-[calc(100%+3rem)]">
+            <div
+              class="glass float-card float-a rounded-2xl border border-amber-200/60 bg-amber-50/90 p-4 shadow-[var(--shadow-float)]"
+            >
+              <div class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-xl bg-amber-100 text-amber-800" aria-hidden="true">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    ></path></svg
+                  >
+                </span>
+                <div>
+                  <p class="text-sm font-medium text-surface-900">Stock alert</p>
+                  <p class="mt-0.5 text-sm text-muted">Cocoa powder — 4 units left</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -right-2 top-24 w-[88%] sm:-right-4">
+            <div
+              class="glass float-card float-b rounded-2xl border border-rose-200/60 bg-rose-50/90 p-4 shadow-[var(--shadow-float)]"
+            >
+              <div class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-xl bg-rose-100 text-rose-800" aria-hidden="true">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path></svg
+                  >
+                </span>
+                <div>
+                  <p class="text-sm font-medium text-surface-900">Expiry alert</p>
+                  <p class="mt-0.5 text-sm text-muted">Dairy batch #204 — 3 days</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="demo" class="sr-only" aria-hidden="true">Demo anchor — connect a video or modal here.</div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .float-card {
+      animation: float-soft 7s ease-in-out infinite;
+    }
+    .float-b {
+      animation-delay: -3.5s;
+    }
+    @keyframes float-soft {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+  }
+</style>

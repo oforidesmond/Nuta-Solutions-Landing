@@ -1,0 +1,74 @@
+---
+const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+
+const tiers = [
+  {
+    name: 'Starter',
+    price: 'Contact us',
+    blurb: 'For single-location teams getting started with a modern POS system in Ghana and beyond.',
+    cta: 'Talk to sales',
+    featured: false,
+  },
+  {
+    name: 'Growth',
+    price: 'Contact us',
+    blurb: 'For expanding inventory management needs, more staff, and tighter operational visibility.',
+    cta: 'Start for free',
+    featured: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Contact us',
+    blurb: 'For multi-site retail, advanced controls, and tailored rollout support across Africa.',
+    cta: 'Contact us',
+    featured: false,
+  },
+];
+---
+
+<section id="pricing" class="scroll-mt-28 px-4 py-20 md:px-6 md:py-28" aria-labelledby="pricing-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="max-w-3xl" data-reveal>
+      <h2 id="pricing-heading" class="section-title">Simple pricing, serious value</h2>
+      <p class="section-sub">
+        Transparent tiers—placeholder numbers ship later. The goal is clarity: pick a lane, move fast, and scale your
+        cloud POS system without a maze of add-ons.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      {
+        tiers.map((t, i) => (
+          <article
+            class:list={[
+              'relative flex flex-col rounded-[1.75rem] border p-8 transition-all duration-200',
+              t.featured
+                ? 'border-brand-200/80 bg-white shadow-[var(--shadow-float)] ring-1 ring-brand-100/60'
+                : 'border-surface-200/80 bg-white/80 shadow-[var(--shadow-soft)] hover:border-brand-200/40',
+            ]}
+            data-reveal
+            style={`transition-delay: ${i * 45}ms`}
+          >
+            {t.featured && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-600 px-3 py-1 text-xs font-medium text-white">
+                Popular
+              </span>
+            )}
+            <h3 class="text-lg font-medium tracking-tight text-surface-900">{t.name}</h3>
+            <p class="mt-4 text-3xl font-medium tracking-tight text-surface-900">{t.price}</p>
+            <p class="mt-4 flex-1 text-[15px] leading-relaxed text-muted">{t.blurb}</p>
+            <a
+              href={signupHref}
+              class:list={[
+                'mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-[15px] font-medium transition-all duration-200',
+                t.featured ? 'btn-primary' : 'btn-secondary',
+              ]}
+            >
+              {t.cta}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+const problems = [
+  'Manual bookkeeping errors',
+  'Stock mismanagement',
+  'Expired goods losses',
+  'Slow checkout process',
+  'Poor visibility into business performance',
+];
+---
+
+<section class="px-4 py-20 md:px-6 md:py-28" aria-labelledby="problem-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid gap-14 lg:grid-cols-2 lg:gap-20">
+      <div data-reveal>
+        <h2 id="problem-heading" class="section-title">The cost of disconnected tools</h2>
+        <p class="section-sub">
+          Spreadsheets and guesswork quietly drain margin—especially when inventory and checkout are not speaking the
+          same language.
+        </p>
+        <ul class="mt-10 list-none space-y-4">
+          {
+            problems.map((p) => (
+              <li class="flex gap-3 text-[17px] leading-snug text-surface-900">
+                <span
+                  class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"
+                  aria-hidden="true"
+                />
+                {p}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div data-reveal class="flex flex-col justify-center">
+        <div class="glass rounded-[2rem] p-8 md:p-10">
+          <p class="text-sm font-medium uppercase tracking-wider text-brand-600">The PulsePOS answer</p>
+          <h3 class="mt-3 text-2xl font-medium tracking-tight text-surface-900 md:text-3xl">
+            Automation and real-time tracking
+          </h3>
+          <p class="mt-5 text-lg leading-relaxed text-muted">
+            PulsePOS unifies sales, stock, and bookkeeping so your team works from one source of truth. Alerts surface
+            before problems become losses—ideal for retail management software that needs to stay fast at the counter and
+            accurate in the back office.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

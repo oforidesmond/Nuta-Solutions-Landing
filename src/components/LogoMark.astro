@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+  variant?: 'light' | 'dark';
+}
+
+const { class: className = '', variant = 'dark' } = Astro.props;
+const fillSecondary = variant === 'dark' ? '#0a0a0b' : '#ffffff';
+---
+
+<svg
+  class={className}
+  viewBox="0 0 32 32"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- T-mark: 3x3 grid, gap ~0.5, cell ~3 -->
+  <rect x="1" y="1" width="8" height="8" rx="2.2" fill="#2B26FF"></rect>
+  <rect x="12" y="1" width="8" height="8" rx="2.2" fill={fillSecondary}></rect>
+  <rect x="23" y="1" width="8" height="8" rx="2.2" fill={fillSecondary}></rect>
+  <rect x="12" y="12" width="8" height="8" rx="2.2" fill={fillSecondary}></rect>
+  <rect x="23" y="12" width="8" height="8" rx="2.2" fill={fillSecondary}></rect>
+  <rect x="12" y="23" width="8" height="8" rx="2.2" fill={fillSecondary}></rect>
+</svg>

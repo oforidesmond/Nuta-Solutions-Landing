@@ -1,0 +1,77 @@
+---
+import FeatureIcon from '@/components/FeatureIcon.astro';
+
+const features = [
+  {
+    title: 'Stock alerts',
+    desc: 'Real-time low stock notifications so you reorder before shelves go empty.',
+    icon: 'bell',
+  },
+  {
+    title: 'Expiry alerts',
+    desc: 'Catch expiring goods early and cut waste across stores and warehouses.',
+    icon: 'calendar',
+  },
+  {
+    title: 'Simplified bookkeeping',
+    desc: 'Automatic transaction logging that keeps books aligned with every sale.',
+    icon: 'ledger',
+  },
+  {
+    title: 'Faster checkouts',
+    desc: 'An optimized POS flow that keeps lines moving—even on busy days.',
+    icon: 'bolt',
+  },
+  {
+    title: 'User-friendly interface',
+    desc: 'Designed for frontline staff—minimal training, fewer mistakes.',
+    icon: 'sparkle',
+  },
+  {
+    title: 'Flexible, affordable pricing',
+    desc: 'Plans that scale with you—clear tiers without surprise complexity.',
+    icon: 'tag',
+  },
+  {
+    title: 'PulseAudit',
+    desc: 'Track stock discrepancies with structured audit workflows.',
+    icon: 'search',
+  },
+  {
+    title: 'Secure cloud storage',
+    desc: 'Access data anywhere with resilient cloud infrastructure.',
+    icon: 'cloud',
+  },
+  {
+    title: 'Fully customisable setup',
+    desc: 'Configure categories, roles, and workflows to match how you operate.',
+    icon: 'sliders',
+  },
+] as const;
+---
+
+<section id="features" class="scroll-mt-28 px-4 py-20 md:px-6 md:py-28" aria-labelledby="features-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="max-w-3xl" data-reveal>
+      <h2 id="features-heading" class="section-title">Everything you need in one POS system</h2>
+      <p class="section-sub">
+        From inventory management to checkout, PulsePOS is built as a small business POS system that still feels
+        enterprise-grade—whether you operate in Ghana or anywhere on the continent.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f, i) => (
+          <article class="card-feature" data-reveal style={`transition-delay: ${i * 35}ms`}>
+            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100/80">
+              <FeatureIcon name={f.icon} />
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-surface-900">{f.title}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted">{f.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

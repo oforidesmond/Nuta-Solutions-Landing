@@ -1,0 +1,86 @@
+---
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage,
+  ogType,
+  noindex,
+  showFooter = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
+    <slot name="head" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="relative overflow-x-hidden">
+    <a
+      href="#main-content"
+      class="fixed left-4 top-4 z-[100] -translate-y-[120%] rounded-full bg-brand-600 px-4 py-2 text-sm font-medium text-white opacity-0 shadow-lg transition duration-200 focus:translate-y-0 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2"
+    >
+      Skip to content
+    </a>
+    <div
+      class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgb(224_228_255/0.7),transparent)]"
+      aria-hidden="true"
+    >
+    </div>
+    <Navbar />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+    <script is:inline>
+      (function () {
+        var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var nodes = document.querySelectorAll('[data-reveal]');
+        if (mq.matches) {
+          nodes.forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+        );
+        nodes.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>

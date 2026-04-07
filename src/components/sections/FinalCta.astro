@@ -1,0 +1,31 @@
+---
+const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+---
+
+<section class="px-4 pb-24 pt-8 md:px-6 md:pb-32" aria-labelledby="final-cta-heading">
+  <div class="mx-auto max-w-6xl">
+    <div
+      class="glass relative overflow-hidden rounded-[2rem] px-8 py-16 text-center md:px-16 md:py-20"
+      data-reveal
+    >
+      <div
+        class="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-brand-200/40 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-brand-300/30 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <h2 id="final-cta-heading" class="relative text-balance text-3xl font-medium tracking-tight text-surface-900 md:text-4xl">
+        Start your business transformation today
+      </h2>
+      <p class="relative mx-auto mt-4 max-w-xl text-lg text-muted">
+        Join retailers who want a POS system Ghana teams can adopt quickly—with inventory management and insights in one
+        place.
+      </p>
+      <a href={signupHref} class="btn-primary relative mt-10"> Start for Free </a>
+    </div>
+  </div>
+</section>
