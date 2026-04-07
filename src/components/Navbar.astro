@@ -1,7 +1,7 @@
 ---
 import LogoMark from '@/components/LogoMark.astro';
 
-const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+// const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
 const nav = [
   { href: '/#features', label: 'Features' },
   { href: '/#trust', label: 'Trust' },
@@ -35,7 +35,14 @@ const nav = [
     </ul>
 
     <div class="hidden items-center gap-3 md:flex">
-      <a href={signupHref} class="btn-primary text-sm"> Start for free </a>
+      <button type="button" data-tp-open="signup" class="btn-primary text-sm"> Start for free </button>
+      <button 
+        type="button" 
+        data-tp-open="signin" 
+        class="rounded-full border border-surface-200/80 bg-white/70 px-4 py-3 text-sm font-medium text-surface-900 shadow-[var(--shadow-soft)] transition-all hover:bg-white"
+      > 
+      Sign in 
+    </button>
     </div>
 
     <details class="relative md:hidden">
@@ -62,7 +69,20 @@ const nav = [
           }
         </ul>
         <div class="border-t border-surface-200/80 p-2">
-          <a href={signupHref} class="btn-primary block w-full text-center text-sm"> Start for free </a>
+          <button
+          type="button"
+          data-tp-open="signup"
+          class="btn-primary block w-full text-center text-sm"
+        >
+          Start for free
+        </button>
+        <button
+          type="button"
+          data-tp-open="signin"
+          class="mt-2 block w-full rounded-full border border-surface-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-surface-900 transition-all hover:bg-white"
+        >
+          Sign in
+        </button>
         </div>
       </div>
     </details>

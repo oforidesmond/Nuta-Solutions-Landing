@@ -3,6 +3,7 @@ import '@/styles/global.css';
 import SEO from '@/components/SEO.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import SignupModal from '@/components/SignupModal.astro';
 
 interface Props {
   title: string;
@@ -56,6 +57,7 @@ const {
       <slot />
     </main>
     {showFooter && <Footer />}
+    <SignupModal />
     <script is:inline>
       (function () {
         var mq = window.matchMedia('(prefers-reduced-motion: reduce)');

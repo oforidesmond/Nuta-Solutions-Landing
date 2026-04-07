@@ -1,5 +1,5 @@
 ---
-const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+// const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
 ---
 
 <section
@@ -18,7 +18,7 @@ const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
         platform built for teams in Ghana and across Africa.
       </p>
       <div class="mt-10 flex flex-wrap items-center gap-4">
-        <a href={signupHref} class="btn-primary"> Start for free </a>
+        <button type="button" data-tp-open="signup" class="btn-primary"> Start for free </button>
         <a href="#demo" class="btn-secondary"> Watch demo </a>
       </div>
       <p class="mt-8 text-sm text-muted">
