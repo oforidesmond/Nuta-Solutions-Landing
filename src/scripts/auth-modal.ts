@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { api } from '@/lib/api';
-import { setTokens, setUser } from '@/lib/auth-store';
+import { getRefreshToken, setTokens, setUser } from '@/lib/auth-store';
 
 const SIGNUP_FIELD_MAP: Record<string, string> = {
   organizationName: 'businessName',
@@ -24,6 +24,11 @@ const SIGNIN_FIELD_MAP: Record<string, string> = {
 function dashboardUrl(): string {
   const u = (import.meta.env.PUBLIC_DASHBOARD_URL as string | undefined)?.trim();
   return u || 'http://localhost:5174';
+}
+
+function hubHandoffCallbackUrl(code: string): string {
+  const base = dashboardUrl().replace(/\/$/, '');
+  return `${base}/auth/callback?code=${encodeURIComponent(code)}`;
 }
 
 function splitFullName(full: string): { firstName: string; lastName: string } {
@@ -144,7 +149,8 @@ function showSuccessThenRedirect(
   successBox: HTMLElement,
   messageEl: HTMLElement,
   message: string,
-  redirectMs: number
+  redirectMs: number,
+  redirectUrl?: string
 ): void {
   step1.classList.add('hidden');
   step2.classList.add('hidden');
@@ -152,7 +158,7 @@ function showSuccessThenRedirect(
   messageEl.textContent = message;
   successBox.classList.remove('hidden');
   window.setTimeout(() => {
-    window.location.assign(dashboardUrl());
+    window.location.assign(redirectUrl ?? dashboardUrl());
   }, redirectMs);
 }
 
@@ -408,16 +414,48 @@ export function initAuthModal(): void {
     try {
       const { data } = await api.post('/auth/signup', body);
       applyAuthFromResponse(data);
-      ui.inlineStatus.textContent = '';
-      showSuccessThenRedirect(
-        ui.step1,
-        ui.step2,
-        ui.signin,
-        ui.successBox,
-        ui.successMessage,
-        'Your account is ready. Taking you to the dashboard…',
-        1800
-      );
+      const refreshToken =
+        extractAuthPayload(data).refreshToken ?? getRefreshToken() ?? undefined;
+      if (!refreshToken) {
+        ui.inlineStatus.textContent =
+          'Account created, but we could not start your dashboard session. Please sign in.';
+        return;
+      }
+      try {
+        const { data: handoff } = await api.post<{ code?: string }>('/auth/handoff', {
+          refreshToken,
+        });
+        const code =
+          handoff && typeof handoff === 'object' && typeof handoff.code === 'string'
+            ? handoff.code.trim()
+            : '';
+        if (!code) {
+          ui.inlineStatus.textContent =
+            'Could not connect to your dashboard. Please try signing in.';
+          return;
+        }
+        ui.inlineStatus.textContent = '';
+        showSuccessThenRedirect(
+          ui.step1,
+          ui.step2,
+          ui.signin,
+          ui.successBox,
+          ui.successMessage,
+          'Your account is ready. Taking you to the dashboard…',
+          1800,
+          hubHandoffCallbackUrl(code)
+        );
+      } catch (handoffErr) {
+        handleApiError(
+          handoffErr,
+          () => {},
+          (s) => {
+            ui.inlineStatus.textContent = s;
+          },
+          {},
+          'Could not open your dashboard. Please try signing in.'
+        );
+      }
     } catch (err) {
       handleApiError(
         err,
