@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tradepulse.com',
+  site: 'https://nutasolutions.com',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],

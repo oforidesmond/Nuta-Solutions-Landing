@@ -211,7 +211,7 @@ export function initAuthModal(): void {
       ui.title.textContent = 'Start for free';
       if (ui.subtitle) {
         ui.subtitle.textContent =
-          'Two steps. Takes less than a minute. Then you’ll get a welcome email.';
+          'Two steps. Takes less than a minute. Then your organization will be created.';
         ui.subtitle.classList.remove('hidden');
       }
       ui.step1.classList.remove('hidden');
@@ -250,6 +250,9 @@ export function initAuthModal(): void {
   function open(mode: 'signup' | 'signin'): void {
     ui.overlay.classList.remove('hidden');
     ui.overlay.setAttribute('aria-hidden', 'false');
+    ui.overlay.scrollTop = 0;
+    const panel = document.getElementById('tp-modal');
+    if (panel) panel.scrollTop = 0;
     document.body.style.overflow = 'hidden';
     setMode(mode);
     const firstInput = ui.overlay.querySelector('input,select,button');

@@ -24,11 +24,11 @@ const heardAbout = [
 
 <div
   id="tp-modal-overlay"
-  class="fixed inset-0 z-[1000] hidden bg-black/40 backdrop-blur-[6px]"
+  class="fixed inset-0 z-[1000] hidden overflow-y-auto overscroll-y-contain bg-black/40 backdrop-blur-[6px]"
   aria-hidden="true"
 >
   <div
-    class="mx-auto flex min-h-dvh w-full items-center justify-center px-4 py-10"
+    class="mx-auto flex min-h-dvh w-full items-center justify-center px-4 py-6 sm:py-10"
     role="presentation"
   >
     <div
@@ -36,7 +36,7 @@ const heardAbout = [
       role="dialog"
       aria-modal="true"
       aria-labelledby="tp-modal-title"
-      class="glass relative w-full max-w-[740px] overflow-hidden rounded-[2rem]"
+      class="glass relative my-4 w-full max-w-[740px] max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden rounded-[2rem] sm:my-6"
     >
       <div class="flex items-start justify-between gap-6 border-b border-surface-200/80 p-6">
         <div>
@@ -44,7 +44,7 @@ const heardAbout = [
             Start for free
           </h2>
           <p id="tp-modal-subtitle" class="mt-2 text-[14px] leading-relaxed text-muted">
-            Two steps. Takes less than a minute. Then you’ll get a welcome email.
+            Two steps. Takes less than a minute. Then your organization will be created.
           </p>
         </div>
         <button
@@ -252,9 +252,9 @@ const heardAbout = [
         <form id="tp-signin-form" class="mt-8 hidden" autocomplete="on">
           <div class="flex items-center justify-between gap-4">
             <h3 class="text-lg font-medium tracking-tight text-surface-900">Sign in</h3>
-            <span class="rounded-full bg-surface-100 px-3 py-1 text-xs font-medium text-surface-900 ring-1 ring-surface-200/80">
+            <!-- <span class="rounded-full bg-surface-100 px-3 py-1 text-xs font-medium text-surface-900 ring-1 ring-surface-200/80">
               Prototype
-            </span>
+            </span> -->
           </div>
 
           <div class="mt-6 grid gap-5 sm:grid-cols-2">

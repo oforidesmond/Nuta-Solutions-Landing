@@ -7,15 +7,15 @@ import Trust from '@/components/sections/Trust.astro';
 import Pricing from '@/components/sections/Pricing.astro';
 import FinalCta from '@/components/sections/FinalCta.astro';
 
-const title = 'PulsePOS — Cloud POS & retail management for modern businesses';
+const title = 'NutaPOS — Cloud POS & management for modern businesses';
 const description =
-  'Run inventory, sales, bookkeeping, staff, and insights in one system. PulsePOS is a cloud POS system for Africa and Ghana retailers—retail management software with real-time stock alerts and enterprise-grade trust.';
+  'Run inventory, sales, bookkeeping, staff, and insights in one system. NutaPOS is a cloud POS system for Africa and Ghana businesses—management software with real-time stock alerts and enterprise-grade trust.';
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'PulsePOS',
+  name: 'NutaPOS',
   url: site ? `${site}/` : undefined,
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
@@ -26,10 +26,10 @@ const jsonLd = {
     description: 'Contact for Growth and Enterprise tiers',
   },
   description:
-    'PulsePOS is a point-of-sale and inventory management system for retail businesses, with cloud storage, audit-friendly workflows, and role-based access.',
+    'NutaPOS is a point-of-sale and inventory management system for businesses, with cloud storage, audit-friendly workflows, and role-based access.',
   provider: {
     '@type': 'Organization',
-    name: 'TradePulse',
+    name: 'NutaSolutions',
     url: site || undefined,
   },
 };

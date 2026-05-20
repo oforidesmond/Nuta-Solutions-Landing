@@ -20,7 +20,7 @@ const {
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
 const canonical = `${site}${canonicalPath === '/' ? '' : canonicalPath}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${site}${ogImage}`;
-const pageTitle = title.includes('TradePulse') ? title : `${title} | TradePulse`;
+const pageTitle = title.includes('NutaSolutions') ? title : `${title} | NutaSolutions`;
 ---
 
 <meta charset="utf-8" />
@@ -35,7 +35,7 @@ const pageTitle = title.includes('TradePulse') ? title : `${title} | TradePulse`
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content={ogType} />
 <meta property="og:image" content={ogImageUrl} />
-<meta property="og:site_name" content="TradePulse" />
+<meta property="og:site_name" content="NutaSolutions" />
 <meta property="og:locale" content="en_GH" />
 
 <meta name="twitter:card" content="summary_large_image" />
