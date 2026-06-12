@@ -34,7 +34,7 @@ function hubHandoffCallbackUrl(code: string): string {
 function splitFullName(full: string): { firstName: string; lastName: string } {
   const t = full.trim();
   const i = t.indexOf(' ');
-  if (i === -1) return { firstName: t, lastName: t };
+  if (i === -1) return { firstName: t, lastName: '' };
   return { firstName: t.slice(0, i).trim(), lastName: t.slice(i + 1).trim() };
 }
 
