@@ -151,6 +151,23 @@ function escapeHtml(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
+const INLINE_WARNING_ICON =
+  '<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>';
+
+function setInlineStatus(el: HTMLElement, message: string): void {
+  if (!message.trim()) {
+    clearInlineStatus(el);
+    return;
+  }
+  el.innerHTML = `${INLINE_WARNING_ICON}<span>${escapeHtml(message)}</span>`;
+  el.classList.remove('hidden');
+}
+
+function clearInlineStatus(el: HTMLElement): void {
+  el.textContent = '';
+  el.classList.add('hidden');
+}
+
 function showSuccessThenRedirect(
   step1: HTMLElement,
   step2: HTMLElement,
@@ -243,9 +260,16 @@ export function initAuthModal(): void {
     });
   }
 
+  function setProvisioningFocus(active: boolean): void {
+    ui.modalPanel?.classList.toggle('is-provisioning', active);
+    ui.overlay.classList.toggle('tp-overlay-provisioning', active);
+  }
+
   async function showProvisioning(businessName: string): Promise<void> {
     savedTitle = ui.title.textContent || '';
     savedSubtitle = ui.subtitle?.textContent || '';
+
+    setProvisioningFocus(true);
 
     ui.title.textContent = 'Creating your organization';
     if (ui.subtitle) {
@@ -258,7 +282,7 @@ export function initAuthModal(): void {
     ui.signin.classList.add('hidden');
     ui.successBox.classList.add('hidden');
     ui.modalToolbar?.classList.add('hidden');
-    ui.inlineStatus.textContent = '';
+    clearInlineStatus(ui.inlineStatus);
 
     ui.provisioningMessage.innerHTML = `Setting up <strong>${escapeHtml(businessName)}</strong>. This usually takes a few seconds.`;
 
@@ -286,6 +310,7 @@ export function initAuthModal(): void {
     ui.provisioning.classList.add('hidden');
     ui.provisioning.classList.remove('is-visible');
     ui.provisioning.setAttribute('aria-busy', 'false');
+    setProvisioningFocus(false);
     ui.modalToolbar?.classList.remove('hidden');
     setModalLocked(false);
 
@@ -305,6 +330,7 @@ export function initAuthModal(): void {
     ui.provisioning.classList.add('hidden');
     ui.provisioning.classList.remove('is-visible');
     ui.provisioning.setAttribute('aria-busy', 'false');
+    setProvisioningFocus(false);
     ui.modalToolbar?.classList.remove('hidden');
     setModalLocked(false);
     savedTitle = '';
@@ -332,7 +358,7 @@ export function initAuthModal(): void {
       ui.step2.classList.add('hidden');
       ui.signin.classList.add('hidden');
       signupState = { name: '', email: '', password: '', phone: '' };
-      ui.inlineStatus.textContent = '';
+      clearInlineStatus(ui.inlineStatus);
       syncModeButtons(mode);
     } else {
       ui.title.textContent = 'Sign in';
@@ -343,7 +369,7 @@ export function initAuthModal(): void {
       ui.step1.classList.add('hidden');
       ui.step2.classList.add('hidden');
       ui.signin.classList.remove('hidden');
-      ui.inlineStatus.textContent = '';
+      clearInlineStatus(ui.inlineStatus);
       syncModeButtons(mode);
     }
     clearAllErrors();
@@ -378,7 +404,7 @@ export function initAuthModal(): void {
     ui.overlay.classList.add('hidden');
     ui.overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    ui.inlineStatus.textContent = '';
+    clearInlineStatus(ui.inlineStatus);
     ui.successBox.classList.add('hidden');
     resetProvisioningState();
     clearAllErrors();
@@ -439,7 +465,7 @@ export function initAuthModal(): void {
   ui.step1.addEventListener('submit', (e) => {
     e.preventDefault();
     clearAllErrors();
-    ui.inlineStatus.textContent = '';
+    clearInlineStatus(ui.inlineStatus);
 
     const form = e.target as HTMLFormElement;
     const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
@@ -481,7 +507,7 @@ export function initAuthModal(): void {
   ui.step2.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearAllErrors();
-    ui.inlineStatus.textContent = '';
+    clearInlineStatus(ui.inlineStatus);
 
     const form = e.target as HTMLFormElement;
     const businessName = (form.elements.namedItem('businessName') as HTMLInputElement).value.trim();
@@ -538,8 +564,10 @@ export function initAuthModal(): void {
         extractAuthPayload(data).refreshToken ?? getRefreshToken() ?? undefined;
       if (!refreshToken) {
         hideProvisioning();
-        ui.inlineStatus.textContent =
-          'Account created, but we could not start your dashboard session. Please sign in.';
+        setInlineStatus(
+          ui.inlineStatus,
+          'Account created, but we could not start your dashboard session. Please sign in.'
+        );
         return;
       }
       try {
@@ -552,11 +580,13 @@ export function initAuthModal(): void {
             : '';
         if (!code) {
           hideProvisioning();
-          ui.inlineStatus.textContent =
-            'Could not connect to your dashboard. Please try signing in.';
+          setInlineStatus(
+            ui.inlineStatus,
+            'Could not connect to your dashboard. Please try signing in.'
+          );
           return;
         }
-        ui.inlineStatus.textContent = '';
+        clearInlineStatus(ui.inlineStatus);
         setModalLocked(false);
         ui.title.textContent = 'Welcome to NutaSolutions';
         if (ui.subtitle) {
@@ -580,7 +610,7 @@ export function initAuthModal(): void {
           handoffErr,
           () => {},
           (s) => {
-            ui.inlineStatus.textContent = s;
+            setInlineStatus(ui.inlineStatus, s);
           },
           {},
           'Could not open your dashboard. Please try signing in.'
@@ -592,7 +622,7 @@ export function initAuthModal(): void {
         err,
         setError,
         (s) => {
-          ui.inlineStatus.textContent = s;
+          setInlineStatus(ui.inlineStatus, s);
         },
         SIGNUP_FIELD_MAP,
         'Signup failed. Please try again.'
@@ -603,7 +633,7 @@ export function initAuthModal(): void {
   ui.signin.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearAllErrors();
-    ui.inlineStatus.textContent = '';
+    clearInlineStatus(ui.inlineStatus);
 
     const form = e.target as HTMLFormElement;
     const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
@@ -624,7 +654,7 @@ export function initAuthModal(): void {
     try {
       const { data } = await api.post('/auth/login', { email, password });
       applyAuthFromResponse(data);
-      ui.inlineStatus.textContent = '';
+      clearInlineStatus(ui.inlineStatus);
       showSuccessThenRedirect(
         ui.step1,
         ui.step2,
@@ -640,7 +670,7 @@ export function initAuthModal(): void {
         err,
         setError,
         (s) => {
-          ui.inlineStatus.textContent = s;
+          setInlineStatus(ui.inlineStatus, s);
         },
         SIGNIN_FIELD_MAP,
         'Sign in failed. Please check your details.'

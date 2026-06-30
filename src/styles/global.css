@@ -126,6 +126,46 @@
     transform: translateY(0);
   }
 
+  #tp-modal-overlay.tp-overlay-provisioning {
+    @apply bg-black/55 backdrop-blur-sm;
+  }
+
+  #tp-modal.is-provisioning {
+    overflow: hidden;
+    min-height: min(520px, calc(100dvh - 2rem));
+  }
+
+  #tp-modal.is-provisioning #tp-modal-header,
+  #tp-modal.is-provisioning #tp-modal-body {
+    filter: blur(8px);
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #tp-modal.is-provisioning #tp-signup-provisioning {
+    @apply flex;
+  }
+
+  .tp-lottie-wrap {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .tp-lottie-wrap dotlottie-wc,
+  #tp-provisioning-lottie {
+    display: block;
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  #tp-inline-status:not(.hidden) {
+    @apply flex;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] {
       opacity: 1 !important;

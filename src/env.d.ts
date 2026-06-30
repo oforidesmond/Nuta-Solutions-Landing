@@ -9,6 +9,7 @@ declare global {
         loop?: boolean;
         class?: string;
         id?: string;
+        style?: string;
       };
     }
   }
