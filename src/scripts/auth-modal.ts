@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { api } from '@/lib/api';
 import { getRefreshToken, setTokens, setUser } from '@/lib/auth-store';
+import { ensureDotLottieLoaded } from '@/scripts/dotlottie-loader';
 
 const SIGNUP_FIELD_MAP: Record<string, string> = {
   organizationName: 'businessName',
@@ -142,10 +143,19 @@ function setSubmitLoading(
   }
 }
 
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function showSuccessThenRedirect(
   step1: HTMLElement,
   step2: HTMLElement,
   signin: HTMLElement,
+  provisioning: HTMLElement,
   successBox: HTMLElement,
   messageEl: HTMLElement,
   message: string,
@@ -155,6 +165,9 @@ function showSuccessThenRedirect(
   step1.classList.add('hidden');
   step2.classList.add('hidden');
   signin.classList.add('hidden');
+  provisioning.classList.add('hidden');
+  provisioning.classList.remove('is-visible');
+  provisioning.setAttribute('aria-busy', 'false');
   messageEl.textContent = message;
   successBox.classList.remove('hidden');
   window.setTimeout(() => {
@@ -168,6 +181,12 @@ export function initAuthModal(): void {
   const step2 = document.getElementById('tp-signup-step2') as HTMLFormElement | null;
   const signin = document.getElementById('tp-signin-form') as HTMLFormElement | null;
   const successBox = document.getElementById('tp-modal-success');
+  const provisioning = document.getElementById('tp-signup-provisioning');
+  const provisioningMessage = document.getElementById('tp-provisioning-message');
+  const provisioningLottie = document.getElementById('tp-provisioning-lottie');
+  const provisioningFallback = document.getElementById('tp-provisioning-fallback');
+  const modalToolbar = document.getElementById('tp-modal-toolbar');
+  const modalPanel = document.getElementById('tp-modal');
   const title = document.getElementById('tp-modal-title');
   const subtitle = document.getElementById('tp-modal-subtitle');
   const inlineStatus = document.getElementById('tp-inline-status');
@@ -179,6 +198,8 @@ export function initAuthModal(): void {
     !step2 ||
     !signin ||
     !successBox ||
+    !provisioning ||
+    !provisioningMessage ||
     !title ||
     !inlineStatus ||
     !successMessage
@@ -192,11 +213,103 @@ export function initAuthModal(): void {
     step2,
     signin,
     successBox,
+    provisioning,
+    provisioningMessage,
+    provisioningLottie,
+    provisioningFallback,
+    modalToolbar,
+    modalPanel,
     title,
     subtitle,
     inlineStatus,
     successMessage,
   };
+
+  let modalLocked = false;
+  let savedTitle = '';
+  let savedSubtitle = '';
+
+  function setModalLocked(locked: boolean): void {
+    modalLocked = locked;
+    ui.overlay.dataset.tpLocked = locked ? 'true' : 'false';
+    if (ui.modalPanel) {
+      ui.modalPanel.setAttribute('aria-busy', locked ? 'true' : 'false');
+    }
+    ui.overlay.querySelectorAll<HTMLButtonElement>(
+      '[data-tp-close], [data-tp-back-to-step1], [data-tp-close-step1], [data-tp-close-signin], [data-tp-mode]'
+    ).forEach((btn) => {
+      btn.disabled = locked;
+      btn.setAttribute('aria-disabled', locked ? 'true' : 'false');
+    });
+  }
+
+  async function showProvisioning(businessName: string): Promise<void> {
+    savedTitle = ui.title.textContent || '';
+    savedSubtitle = ui.subtitle?.textContent || '';
+
+    ui.title.textContent = 'Creating your organization';
+    if (ui.subtitle) {
+      ui.subtitle.textContent = 'Hang tight while we set everything up for you.';
+      ui.subtitle.classList.remove('hidden');
+    }
+
+    ui.step1.classList.add('hidden');
+    ui.step2.classList.add('hidden');
+    ui.signin.classList.add('hidden');
+    ui.successBox.classList.add('hidden');
+    ui.modalToolbar?.classList.add('hidden');
+    ui.inlineStatus.textContent = '';
+
+    ui.provisioningMessage.innerHTML = `Setting up <strong>${escapeHtml(businessName)}</strong>. This usually takes a few seconds.`;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      ui.provisioningLottie?.classList.add('hidden');
+      ui.provisioningFallback?.classList.remove('hidden');
+    } else {
+      await ensureDotLottieLoaded();
+      ui.provisioningLottie?.classList.remove('hidden');
+      ui.provisioningFallback?.classList.add('hidden');
+    }
+
+    ui.provisioning.classList.remove('hidden');
+    ui.provisioning.setAttribute('aria-busy', 'true');
+    ui.provisioning.classList.remove('is-visible');
+    requestAnimationFrame(() => {
+      ui.provisioning.classList.add('is-visible');
+    });
+
+    setModalLocked(true);
+  }
+
+  function hideProvisioning(restoreStep2 = true): void {
+    ui.provisioning.classList.add('hidden');
+    ui.provisioning.classList.remove('is-visible');
+    ui.provisioning.setAttribute('aria-busy', 'false');
+    ui.modalToolbar?.classList.remove('hidden');
+    setModalLocked(false);
+
+    if (restoreStep2) {
+      ui.title.textContent = savedTitle || 'Start for free';
+      if (ui.subtitle) {
+        ui.subtitle.textContent =
+          savedSubtitle ||
+          'Two steps. Takes less than a minute. Then your organization will be created.';
+        ui.subtitle.classList.remove('hidden');
+      }
+      ui.step2.classList.remove('hidden');
+    }
+  }
+
+  function resetProvisioningState(): void {
+    ui.provisioning.classList.add('hidden');
+    ui.provisioning.classList.remove('is-visible');
+    ui.provisioning.setAttribute('aria-busy', 'false');
+    ui.modalToolbar?.classList.remove('hidden');
+    setModalLocked(false);
+    savedTitle = '';
+    savedSubtitle = '';
+  }
 
   let signupState: {
     name: string;
@@ -206,6 +319,7 @@ export function initAuthModal(): void {
   } = { name: '', email: '', password: '', phone: '' };
 
   function setMode(mode: 'signup' | 'signin'): void {
+    resetProvisioningState();
     ui.successBox.classList.add('hidden');
     if (mode === 'signup') {
       ui.title.textContent = 'Start for free';
@@ -260,11 +374,13 @@ export function initAuthModal(): void {
   }
 
   function close(): void {
+    if (modalLocked) return;
     ui.overlay.classList.add('hidden');
     ui.overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     ui.inlineStatus.textContent = '';
     ui.successBox.classList.add('hidden');
+    resetProvisioningState();
     clearAllErrors();
   }
 
@@ -292,13 +408,14 @@ export function initAuthModal(): void {
   }
 
   ui.overlay.addEventListener('click', (e) => {
+    if (modalLocked) return;
     const t = e.target as HTMLElement;
     if (t.closest?.('[data-tp-close]')) close();
     if (e.target === ui.overlay) close();
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !ui.overlay.classList.contains('hidden')) close();
+    if (e.key === 'Escape' && !ui.overlay.classList.contains('hidden') && !modalLocked) close();
   });
 
   document.addEventListener('click', (e) => {
@@ -413,13 +530,14 @@ export function initAuthModal(): void {
       branchCount: branchesNum,
     };
 
-    setSubmitLoading(form, true, 'Submit', 'Submitting…');
     try {
+      await showProvisioning(businessName);
       const { data } = await api.post('/auth/signup', body);
       applyAuthFromResponse(data);
       const refreshToken =
         extractAuthPayload(data).refreshToken ?? getRefreshToken() ?? undefined;
       if (!refreshToken) {
+        hideProvisioning();
         ui.inlineStatus.textContent =
           'Account created, but we could not start your dashboard session. Please sign in.';
         return;
@@ -433,15 +551,23 @@ export function initAuthModal(): void {
             ? handoff.code.trim()
             : '';
         if (!code) {
+          hideProvisioning();
           ui.inlineStatus.textContent =
             'Could not connect to your dashboard. Please try signing in.';
           return;
         }
         ui.inlineStatus.textContent = '';
+        setModalLocked(false);
+        ui.title.textContent = 'Welcome to NutaSolutions';
+        if (ui.subtitle) {
+          ui.subtitle.textContent = '';
+          ui.subtitle.classList.add('hidden');
+        }
         showSuccessThenRedirect(
           ui.step1,
           ui.step2,
           ui.signin,
+          ui.provisioning,
           ui.successBox,
           ui.successMessage,
           'Your account is ready. Taking you to the dashboard…',
@@ -449,6 +575,7 @@ export function initAuthModal(): void {
           hubHandoffCallbackUrl(code)
         );
       } catch (handoffErr) {
+        hideProvisioning();
         handleApiError(
           handoffErr,
           () => {},
@@ -460,6 +587,7 @@ export function initAuthModal(): void {
         );
       }
     } catch (err) {
+      hideProvisioning();
       handleApiError(
         err,
         setError,
@@ -469,8 +597,6 @@ export function initAuthModal(): void {
         SIGNUP_FIELD_MAP,
         'Signup failed. Please try again.'
       );
-    } finally {
-      setSubmitLoading(form, false, 'Submit', 'Submitting…');
     }
   });
 
@@ -503,6 +629,7 @@ export function initAuthModal(): void {
         ui.step1,
         ui.step2,
         ui.signin,
+        ui.provisioning,
         ui.successBox,
         ui.successMessage,
         'Welcome back. Redirecting to your dashboard…',
