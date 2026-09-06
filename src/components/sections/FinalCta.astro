@@ -1,5 +1,5 @@
 ---
-const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+import { SUPPORT_EMAIL, PHONE_DISPLAY, mailtoHref, telHref } from '@/lib/contact';
 ---
 
 <section class="px-4 pb-24 pt-8 md:px-6 md:pb-32" aria-labelledby="final-cta-heading">
@@ -26,6 +26,12 @@ const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
         place.
       </p>
       <a href="#" data-tp-open="signup" class="btn-primary relative mt-10"> Start for Free </a>
+      <p class="relative mt-6 text-[15px] text-muted">
+        Or call/WhatsApp{' '}
+        <a href={telHref()} class="font-medium text-surface-900 hover:text-brand-600">{PHONE_DISPLAY}</a>
+        {' '}or email{' '}
+        <a href={mailtoHref()} class="font-medium text-surface-900 hover:text-brand-600">{SUPPORT_EMAIL}</a>
+      </p>
     </div>
   </div>
 </section>

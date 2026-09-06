@@ -1,5 +1,5 @@
 ---
-// const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
+import { mailtoHref } from '@/lib/contact';
 
 const tiers = [
   {
@@ -8,6 +8,8 @@ const tiers = [
     blurb: 'For single-location teams getting started with a modern POS system in Ghana and beyond.',
     cta: 'Talk to sales',
     featured: false,
+    action: 'mailto' as const,
+    mailtoSubject: 'Sales inquiry — Starter',
   },
   {
     name: 'Growth',
@@ -15,6 +17,7 @@ const tiers = [
     blurb: 'For expanding inventory management needs, more staff, and tighter operational visibility.',
     cta: 'Start for free',
     featured: true,
+    action: 'signup' as const,
   },
   {
     name: 'Enterprise',
@@ -22,6 +25,8 @@ const tiers = [
     blurb: 'For multi-site business, advanced controls, and tailored rollout support across Africa.',
     cta: 'Contact us',
     featured: false,
+    action: 'mailto' as const,
+    mailtoSubject: 'Sales inquiry — Enterprise',
   },
 ];
 ---
@@ -57,16 +62,28 @@ const tiers = [
             <h3 class="text-lg font-medium tracking-tight text-surface-900">{t.name}</h3>
             <p class="mt-4 text-3xl font-medium tracking-tight text-surface-900">{t.price}</p>
             <p class="mt-4 flex-1 text-[15px] leading-relaxed text-muted">{t.blurb}</p>
-            <button
-              type="button"
-              data-tp-open="signup"
-              class:list={[
-                'mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-[15px] font-medium transition-all duration-200',
-                t.featured ? 'btn-primary' : 'btn-secondary',
-              ]}
-            >
-              {t.cta}
-            </button>
+            {t.action === 'signup' ? (
+              <button
+                type="button"
+                data-tp-open="signup"
+                class:list={[
+                  'mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-[15px] font-medium transition-all duration-200',
+                  t.featured ? 'btn-primary' : 'btn-secondary',
+                ]}
+              >
+                {t.cta}
+              </button>
+            ) : (
+              <a
+                href={mailtoHref(t.mailtoSubject)}
+                class:list={[
+                  'mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-[15px] font-medium transition-all duration-200 no-underline',
+                  t.featured ? 'btn-primary' : 'btn-secondary',
+                ]}
+              >
+                {t.cta}
+              </a>
+            )}
           </article>
         ))
       }

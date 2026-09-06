@@ -1,8 +1,8 @@
 ---
 import LogoMark from '@/components/LogoMark.astro';
+import { SUPPORT_EMAIL, PHONE_DISPLAY, mailtoHref, telHref } from '@/lib/contact';
 
 const year = new Date().getFullYear();
-const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
 ---
 
 <footer class="border-t border-surface-200/80 bg-white/60 py-16 backdrop-blur-sm">
@@ -29,11 +29,16 @@ const signupHref = import.meta.env.PUBLIC_SIGNUP_URL ?? '#signup';
         </ul>
       </div>
       <div>
-        <p class="text-xs font-medium uppercase tracking-wider text-muted">Company</p>
+        <p class="text-xs font-medium uppercase tracking-wider text-muted">Contact</p>
         <ul class="mt-4 list-none space-y-3">
           <li>
-            <a href="mailto:hello@nutasolutions.com" class="text-[15px] text-surface-900 hover:text-brand-600">
-              hello@nutasolutions.com
+            <a href={telHref()} class="text-[15px] font-medium text-surface-900 hover:text-brand-600">
+              {PHONE_DISPLAY}
+            </a>
+          </li>
+          <li>
+            <a href={mailtoHref()} class="text-[15px] font-medium text-surface-900 hover:text-brand-600">
+              {SUPPORT_EMAIL}
             </a>
           </li>
           <li>
