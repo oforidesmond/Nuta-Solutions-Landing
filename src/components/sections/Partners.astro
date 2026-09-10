@@ -1,0 +1,103 @@
+---
+const partners = [
+  { name: 'Bidi Group Energy', src: '/partners/bidi.png', dark: true },
+  { name: 'Ghana Cocoa Board', src: '/partners/cocobod.jpg', dark: true },
+  { name: 'Excellence Kids', src: '/partners/excellence-kids.png', dark: true },
+  { name: 'Adikanfo Commodities', src: '/partners/adikanfo.png', dark: true },
+] as const;
+
+const track = [...partners, ...partners];
+---
+
+<section id="partners" class="scroll-mt-28 px-4 py-16 md:px-6 md:py-20" aria-labelledby="partners-heading">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between" data-reveal>
+      <div class="max-w-2xl">
+        <h2 id="partners-heading" class="section-title">Trusted by institutions across Ghana</h2>
+        <p class="section-sub">
+          Through NutaWEB, we build software for schools, boards, and companies that need serious systems — not just a website.
+        </p>
+      </div>
+      <a href="/nutaweb" class="shrink-0 text-[15px] font-medium text-brand-600 hover:text-brand-700">
+        See what we build with NutaWEB →
+      </a>
+    </div>
+
+    <div class="partners-marquee mt-10" data-reveal>
+      <div class="partners-track">
+        {
+          track.map((p, i) => (
+            <div
+              class:list={[
+                'partners-item',
+                p.dark && 'partners-item--dark',
+              ]}
+              aria-hidden={i >= partners.length ? 'true' : undefined}
+            >
+              <img src={p.src} alt={i < partners.length ? p.name : ''} class="partners-logo" loading="lazy" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .partners-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    align-items: center;
+  }
+
+  .partners-item {
+    display: flex;
+    height: 5.5rem;
+    width: 11rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.25rem;
+    border: 1px solid color-mix(in oklab, var(--color-surface-200) 80%, transparent);
+    background: color-mix(in oklab, white 80%, transparent);
+    padding: 0.85rem 1.1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .partners-item--dark {
+    background: #0a0a0b;
+    border-color: #1a1a1c;
+  }
+
+  .partners-logo {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .partners-track {
+      animation: partners-scroll 32s linear infinite;
+    }
+
+    .partners-marquee:hover .partners-track {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes partners-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

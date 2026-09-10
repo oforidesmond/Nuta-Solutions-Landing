@@ -1,24 +1,220 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SUPPORT_EMAIL, PHONE_DISPLAY, mailtoHref, telHref } from '@/lib/contact';
 
 const title = 'Privacy Policy';
 const description =
-  'How NutaSolutions handles information for visitors and customers of NutaPOS and related services. Placeholder policy-replace with legal review.';
+  'How NutaSolutions collects, uses, and protects personal information for NutaPOS and related websites under Ghana data protection law.';
+const lastUpdated = 'September 10, 2026';
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/privacy">
   <article class="mx-auto max-w-3xl px-4 pb-24 pt-32 md:px-6 md:pt-36">
     <h1 class="text-4xl font-medium tracking-tight text-surface-900">Privacy Policy</h1>
-    <p class="mt-4 text-muted">Last updated: April 5, 2026</p>
-    <div class="mt-10 max-w-none text-[17px] leading-relaxed">
-      <p class="text-muted">
-        This page is a placeholder. Replace this content with a policy drafted for your jurisdictions, products, and data
-        practices.
+    <p class="mt-4 text-muted">Last updated: {lastUpdated}</p>
+    <div class="mt-10 max-w-none space-y-3 text-[17px] leading-relaxed text-muted">
+      <p>
+        This Privacy Policy explains how NutaSolutions (“NutaSolutions,” “we,” “us,” or “our”) collects, uses, stores,
+        shares, and protects personal information when you visit our websites, create an account, or use NutaPOS and
+        related services (together, the “Services”).
       </p>
-      <h2 class="mt-10 text-2xl font-medium tracking-tight">Overview</h2>
-      <p class="mt-3 text-muted">
-        NutaSolutions is committed to protecting privacy for teams evaluating or using NutaPOS. When you replace this
-        stub, describe what you collect, why, retention, subprocessors, and contact details for privacy requests.
+      <p>
+        We process personal data in line with the Data Protection Act, 2012 (Act 843) of Ghana and other applicable
+        laws. By using the Services, you acknowledge the practices described here.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">1. Who we are</h2>
+      <p>
+        NutaSolutions provides NutaPOS, a cloud point-of-sale and business management platform for inventory, sales,
+        bookkeeping, staff access, audits, and related operations, primarily for businesses in Ghana and across Africa.
+        Related sites (including NutaWEB roadmap pages) are covered by this policy unless a separate notice says
+        otherwise.
+      </p>
+      <p>
+        Privacy requests and questions: email
+        <a href={mailtoHref('Privacy request')} class="text-brand-600 hover:text-brand-700">{SUPPORT_EMAIL}</a>
+        or call
+        <a href={telHref()} class="text-brand-600 hover:text-brand-700">{PHONE_DISPLAY}</a>.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">2. Scope</h2>
+      <p>This policy applies to:</p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>Visitors to our marketing and product websites</li>
+        <li>People who sign up, sign in, or request sales information</li>
+        <li>Authorized users of a customer’s NutaPOS account (owners, managers, and staff)</li>
+      </ul>
+      <p>
+        It does not replace privacy notices that our merchant customers must give to their own end customers or
+        employees when they use NutaPOS in their stores.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">3. Roles: controller and processor</h2>
+      <p>
+        <strong class="font-medium text-surface-900">Account and site data.</strong> For information you provide to
+        create an account, contact sales, or browse our sites (such as your name, email, phone, and business profile),
+        NutaSolutions is typically the data controller: we decide why and how that data is processed.
+      </p>
+      <p>
+        <strong class="font-medium text-surface-900">Customer Content.</strong> Data that customers and their staff enter
+        into NutaPOS—such as sales and receipts, inventory and stock movements, bookkeeping records, staff profiles and
+        roles, audit logs, and any end-customer details captured at checkout—is “Customer Content.” For Customer
+        Content, the merchant customer is the data controller. NutaSolutions acts as a data processor: we process that
+        data on the customer’s instructions to provide the Services.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">4. Information we collect</h2>
+      <h3 class="!mt-6 text-xl font-medium tracking-tight text-surface-900">4.1 Information you provide</h3>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>
+          <strong class="font-medium text-surface-900">Account signup:</strong> full name, email address, password,
+          phone number, business name, business type, business location, number of branches, and how you heard about
+          us.
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Sign-in:</strong> email and password (and related authentication
+          tokens managed by our systems).
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Communications:</strong> messages you send by email, phone, or
+          other channels, including sales inquiries.
+        </li>
+      </ul>
+      <h3 class="!mt-6 text-xl font-medium tracking-tight text-surface-900">4.2 Customer Content</h3>
+      <p>
+        When you use NutaPOS, we process the business and operational data you and your team upload or generate in the
+        product, including transaction, inventory, staff, and bookkeeping data as configured for your account.
+      </p>
+      <h3 class="!mt-6 text-xl font-medium tracking-tight text-surface-900">4.3 Technical and usage data</h3>
+      <p>
+        We may collect limited technical information needed to operate and secure the Services, such as IP address,
+        device/browser type, timestamps, and diagnostic or security logs related to authentication and API use.
+      </p>
+      <h3 class="!mt-6 text-xl font-medium tracking-tight text-surface-900">4.4 What we do not do</h3>
+      <p>
+        We do not sell personal data. Our marketing website does not currently use third-party advertising or analytics
+        cookies. If that changes, we will update this policy.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">5. Purposes of processing</h2>
+      <p>We use personal information to:</p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>Create and manage accounts, authenticate users, and provide NutaPOS</li>
+        <li>Host and process Customer Content on behalf of our customers</li>
+        <li>Respond to support and sales requests</li>
+        <li>Secure the Services, prevent abuse, and troubleshoot incidents</li>
+        <li>Improve product reliability and features (using aggregated or de-identified insights where practical)</li>
+        <li>Send service-related notices (for example, security or account messages)</li>
+        <li>Comply with law, enforce our Terms of Service, and protect our rights</li>
+      </ul>
+      <p>
+        We apply Act 843 principles including lawful processing, purpose limitation, data minimisation, accuracy,
+        storage limitation, and integrity and confidentiality.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">6. Cookies and similar technologies</h2>
+      <p>
+        Our marketing site is primarily static and does not rely on advertising trackers. The application and API may
+        use essential cookies or local storage for sessions, authentication, and security. You can control cookies
+        through your browser; blocking essential cookies may prevent sign-in or core features from working.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">7. How we share information</h2>
+      <p>We may share personal information with:</p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>
+          <strong class="font-medium text-surface-900">Service providers / subprocessors</strong> who host
+          infrastructure, email, or other operational services under contractual confidentiality and security
+          obligations
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Professional advisers</strong> (legal, accounting) where needed
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Authorities</strong> when required by law or to protect rights,
+          safety, or security
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Business transfers</strong> in connection with a merger,
+          acquisition, or restructuring, subject to appropriate safeguards
+        </li>
+      </ul>
+      <p>
+        Customer Content is accessible to the customer’s authorized users according to roles configured in NutaPOS. We
+        do not disclose Customer Content to unrelated third parties except as needed to provide the Services or as
+        required by law.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">8. International transfers</h2>
+      <p>
+        The Services use cloud infrastructure. Personal data and Customer Content may be stored or processed on servers
+        located outside Ghana. Where we transfer personal data internationally, we take steps consistent with Act 843
+        to protect it, including contractual and technical safeguards with our providers.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">9. Retention</h2>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>
+          <strong class="font-medium text-surface-900">Account and contact data:</strong> kept while your account is
+          active and for a reasonable period afterward for security, dispute resolution, and legal compliance.
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Customer Content:</strong> retained for the life of the
+          subscription and deleted or returned according to our Terms and the customer’s instructions, subject to
+          backup and legal hold cycles.
+        </li>
+        <li>
+          <strong class="font-medium text-surface-900">Logs:</strong> typically retained for shorter operational periods
+          unless needed longer for security or legal reasons.
+        </li>
+      </ul>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">10. Security</h2>
+      <p>
+        We implement appropriate technical and organisational measures to protect personal data against unauthorised
+        access, loss, or misuse. These include encryption-minded architecture, access controls, role-based permissions
+        in NutaPOS, and resilient hosting practices. No method of transmission or storage is completely secure; we work
+        continuously to reduce risk. Where a security compromise involving personal data occurs, we will take steps
+        consistent with applicable law, including notifying affected controllers and, where required, the Data
+        Protection Commission.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">11. Your rights</h2>
+      <p>
+        Subject to Act 843 and other applicable law, individuals may have rights to access personal data we hold about
+        them, request correction of inaccurate data, object to certain processing, and request deletion or restriction
+        where appropriate. To exercise these rights for data we control, contact
+        <a href={mailtoHref('Privacy request')} class="text-brand-600 hover:text-brand-700">{SUPPORT_EMAIL}</a>.
+      </p>
+      <p>
+        For Customer Content processed on behalf of a merchant, please contact that merchant first; we will assist
+        customers in responding to valid requests as required.
+      </p>
+      <p>
+        You may also lodge a complaint with the Data Protection Commission of Ghana if you believe your rights have
+        been infringed.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">12. Children</h2>
+      <p>
+        The Services are designed for businesses and adult users. They are not directed at children, and we do not
+        knowingly collect personal data from children for marketing or account creation.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">13. Changes to this policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. The “Last updated” date at the top will change when we do.
+        For material changes, we may provide additional notice (for example, by email or in-product message). Continued
+        use of the Services after an update constitutes acceptance of the revised policy where permitted by law.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">14. Contact</h2>
+      <p>
+        NutaSolutions<br />
+        Email:
+        <a href={mailtoHref('Privacy request')} class="text-brand-600 hover:text-brand-700">{SUPPORT_EMAIL}</a><br />
+        Phone:
+        <a href={telHref()} class="text-brand-600 hover:text-brand-700">{PHONE_DISPLAY}</a>
       </p>
     </div>
   </article>

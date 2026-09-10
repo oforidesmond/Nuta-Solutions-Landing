@@ -1,0 +1,203 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SUPPORT_EMAIL, PHONE_DISPLAY, mailtoHref, telHref } from '@/lib/contact';
+
+const title = 'NutaWEB — Custom web apps and SaaS for Ghana';
+const description =
+  'NutaWEB is how NutaSolutions builds web apps and SaaS for schools, institutions, and companies — from school management to fuel operations and inventory systems.';
+
+const services = [
+  {
+    title: 'School management systems',
+    desc: 'Admissions, fees, academics, and day-to-day school operations in one platform — built for how Ghanaian schools actually work.',
+  },
+  {
+    title: 'Institutional operations software',
+    desc: 'NSS management, IT requisition, inventory control, and other tools that keep large organisations running cleanly.',
+  },
+  {
+    title: 'Mobile field and ops apps',
+    desc: 'Tools for teams on the ground — like fuel management in the field — that sync back to a central system.',
+  },
+  {
+    title: 'Custom SaaS for companies',
+    desc: 'We design and build the software your business needs, then support it so your team can rely on it every day.',
+  },
+];
+
+const work = [
+  {
+    name: 'Excellence Kids',
+    role: 'Comprehensive school management software',
+    detail: 'A full platform for running school operations — built for a growing educational institution.',
+    logo: '/partners/excellence-kids.png',
+    dark: true,
+  },
+  {
+    name: 'Ghana Cocoa Board (NASPAC)',
+    role: 'NSS management · IT requisition & inventory',
+    detail: 'Systems that help a national institution manage national service workflows and IT stock requests with clear records.',
+    logo: '/partners/cocobod.jpg',
+    dark: true,
+  },
+  {
+    name: 'Bidi Group Energy',
+    role: 'Mobile fuel management software',
+    detail: 'A mobile-first system for tracking and managing fuel operations in the field.',
+    logo: '/partners/bidi.png',
+    dark: true,
+  },
+  {
+    name: 'Adikanfo Commodities LTD',
+    role: 'Custom web systems',
+    detail: 'Partnered software that supports commodity operations with reliable digital tools.',
+    logo: '/partners/adikanfo.png',
+    dark: true,
+  },
+];
+
+const steps = [
+  {
+    title: 'Listen',
+    desc: 'We learn how your people work today — the forms, delays, and gaps that cost time and money.',
+  },
+  {
+    title: 'Design',
+    desc: 'We map a clear system that fits your institution, not a one-size template that fights your process.',
+  },
+  {
+    title: 'Build',
+    desc: 'We ship web and mobile software your team can use, with training so adoption does not stall.',
+  },
+  {
+    title: 'Support',
+    desc: 'We stay with you after go-live — fixes, improvements, and help when operations change.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/nutaweb">
+  <section class="relative px-4 pb-16 pt-28 md:px-6 md:pb-20 md:pt-32" aria-labelledby="nutaweb-heading">
+    <div class="mx-auto max-w-6xl" data-reveal>
+      <p class="text-sm font-medium tracking-wide text-brand-600">NutaWEB</p>
+      <h1 id="nutaweb-heading" class="mt-3 max-w-3xl text-balance text-4xl font-medium tracking-tight text-surface-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.05]">
+        Web apps and SaaS built for institutions and companies
+      </h1>
+      <p class="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted">
+        NutaWEB is how NutaSolutions builds serious software for schools, boards, and businesses in Ghana — systems your
+        teams use every day, not just a brochure website.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href={mailtoHref('NutaWEB inquiry')} class="btn-primary no-underline"> Talk to us </a>
+        <a href={telHref()} class="btn-secondary no-underline"> Call {PHONE_DISPLAY} </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 md:px-6 md:py-24" aria-labelledby="services-heading">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl" data-reveal>
+        <h2 id="services-heading" class="section-title">What we build</h2>
+        <p class="section-sub">
+          From school platforms to inventory and field operations — we deliver software that matches how your organisation works.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2">
+        {
+          services.map((s, i) => (
+            <article
+              class="rounded-[1.75rem] border border-surface-200/80 bg-white/70 p-8 shadow-[var(--shadow-soft)]"
+              data-reveal
+              style={`transition-delay: ${i * 40}ms`}
+            >
+              <h3 class="text-xl font-medium tracking-tight text-surface-900">{s.title}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-muted">{s.desc}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 md:px-6 md:py-24" aria-labelledby="work-heading">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl" data-reveal>
+        <h2 id="work-heading" class="section-title">Selected work</h2>
+        <p class="section-sub">
+          Organisations that trust NutaSolutions to design, build, and support their core systems.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        {
+          work.map((w, i) => (
+            <article
+              class="flex flex-col gap-6 rounded-[1.75rem] border border-surface-200/80 bg-white/80 p-6 shadow-[var(--shadow-soft)] sm:flex-row sm:items-center sm:p-8"
+              data-reveal
+              style={`transition-delay: ${i * 45}ms`}
+            >
+              <div
+                class:list={[
+                  'flex h-24 w-36 shrink-0 items-center justify-center rounded-2xl p-3',
+                  w.dark ? 'bg-[#0a0a0b]' : 'bg-surface-100',
+                ]}
+              >
+                <img src={w.logo} alt={`${w.name} logo`} class="max-h-full max-w-full object-contain" loading="lazy" />
+              </div>
+              <div>
+                <h3 class="text-lg font-medium tracking-tight text-surface-900">{w.name}</h3>
+                <p class="mt-1 text-sm font-medium text-brand-600">{w.role}</p>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted">{w.detail}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 md:px-6 md:py-24" aria-labelledby="process-heading">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-3xl" data-reveal>
+        <h2 id="process-heading" class="section-title">How we work</h2>
+        <p class="section-sub">A clear path from your problem to software your team can run with confidence.</p>
+      </div>
+      <ol class="mt-12 grid list-none gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step, i) => (
+            <li
+              class="rounded-[1.75rem] border border-surface-200/80 bg-white/70 p-6 shadow-[var(--shadow-soft)]"
+              data-reveal
+              style={`transition-delay: ${i * 40}ms`}
+            >
+              <p class="text-sm font-medium text-brand-600">0{i + 1}</p>
+              <h3 class="mt-3 text-lg font-medium tracking-tight text-surface-900">{step.title}</h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-muted">{step.desc}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="px-4 pb-24 pt-8 md:px-6 md:pb-32" aria-labelledby="nutaweb-cta-heading">
+    <div class="mx-auto max-w-6xl">
+      <div class="glass relative overflow-hidden rounded-[2rem] px-8 py-16 text-center md:px-16 md:py-20" data-reveal>
+        <h2 id="nutaweb-cta-heading" class="relative text-balance text-3xl font-medium tracking-tight text-surface-900 md:text-4xl">
+          Need software for your institution or company?
+        </h2>
+        <p class="relative mx-auto mt-4 max-w-xl text-lg text-muted">
+          Tell us what you run today. We will show you how NutaWEB can take it digital — clearly and reliably.
+        </p>
+        <a href={mailtoHref('NutaWEB inquiry')} class="btn-primary relative mt-10 inline-flex no-underline">
+          Start a conversation
+        </a>
+        <p class="relative mt-6 text-[15px] text-muted">
+          Call/WhatsApp{' '}
+          <a href={telHref()} class="font-medium text-surface-900 hover:text-brand-600">{PHONE_DISPLAY}</a>
+          {' '}or email{' '}
+          <a href={mailtoHref()} class="font-medium text-surface-900 hover:text-brand-600">{SUPPORT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -3,49 +3,44 @@ import FeatureIcon from '@/components/FeatureIcon.astro';
 
 const features = [
   {
-    title: 'Stock alerts',
-    desc: 'Real-time low stock notifications so you reorder before shelves go empty.',
-    icon: 'bell',
+    title: 'Sell when internet is down',
+    desc: 'Staff keep selling on the phone app offline. When the network comes back, sales upload on their own.',
+    icon: 'wifi',
   },
   {
-    title: 'Expiry alerts',
-    desc: 'Catch expiring goods early and cut waste across stores and warehouses.',
+    title: 'See the shop from your phone',
+    desc: 'Open the Management Hub anytime. Check sales, stock, and money without calling the shop.',
+    icon: 'phone',
+  },
+  {
+    title: 'Stock, expiry, and batches',
+    desc: 'Know what is left, which batch will expire soon, and get warned before goods go bad.',
     icon: 'calendar',
   },
   {
-    title: 'Simplified bookkeeping',
-    desc: 'Automatic transaction logging that keeps books aligned with every sale.',
-    icon: 'ledger',
+    title: 'Mobile Money and more',
+    desc: 'Record cash, Mobile Money, card, bank transfer, or mixed payments on every sale.',
+    icon: 'wallet',
   },
   {
-    title: 'Faster checkouts',
-    desc: 'An optimized POS flow that keeps lines moving-even on busy days.',
-    icon: 'bolt',
+    title: 'Many shops, one account',
+    desc: 'Add branches, see each shop’s stock and sales, set different prices, and move stock between shops.',
+    icon: 'branches',
   },
   {
-    title: 'User-friendly interface',
-    desc: 'Designed for frontline staff-minimal training, fewer mistakes.',
-    icon: 'sparkle',
+    title: 'Carton to piece, tracked',
+    desc: 'Break a carton into singles and keep stock correct — whether you sell by piece or by pack.',
+    icon: 'box',
   },
   {
-    title: 'Flexible, affordable pricing',
-    desc: 'Plans that scale with you-clear tiers without surprise complexity.',
-    icon: 'tag',
+    title: 'Staff you can control',
+    desc: 'Owner, manager, and cashier roles. Cap discounts, limit who can void sales, and see who did what.',
+    icon: 'users',
   },
   {
-    title: 'NutaAudit',
-    desc: 'Track stock discrepancies with structured audit workflows.',
-    icon: 'search',
-  },
-  {
-    title: 'Secure cloud storage',
-    desc: 'Access data anywhere with resilient cloud infrastructure.',
-    icon: 'cloud',
-  },
-  {
-    title: 'Fully customisable setup',
-    desc: 'Configure categories, roles, and workflows to match how you operate.',
-    icon: 'sliders',
+    title: 'Alerts that matter',
+    desc: 'Get told about low stock, expiry, returns, and unusual activity — so you can act before you lose money.',
+    icon: 'bell',
   },
 ] as const;
 ---
@@ -53,14 +48,14 @@ const features = [
 <section id="features" class="scroll-mt-28 px-4 py-20 md:px-6 md:py-28" aria-labelledby="features-heading">
   <div class="mx-auto max-w-6xl">
     <div class="max-w-3xl" data-reveal>
-      <h2 id="features-heading" class="section-title">Everything you need in one POS system</h2>
+      <h2 id="features-heading" class="section-title">What NutaPOS does for your business</h2>
       <p class="section-sub">
-        From inventory management to checkout, NutaPOS is built as a small business POS system that still feels
-        enterprise-grade-whether you operate in Ghana or anywhere on the continent.
+        Built for provision shops, pharmacies, cosmetics, hardware, boutiques, and wholesale — anyone ready to leave
+        notebooks behind.
       </p>
     </div>
 
-    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {
         features.map((f, i) => (
           <article class="card-feature" data-reveal style={`transition-delay: ${i * 35}ms`}>

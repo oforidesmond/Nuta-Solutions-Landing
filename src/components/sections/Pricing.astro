@@ -3,30 +3,33 @@ import { mailtoHref } from '@/lib/contact';
 
 const tiers = [
   {
-    name: 'Starter',
-    price: 'Contact us',
-    blurb: 'For single-location teams getting started with a modern POS system in Ghana and beyond.',
-    cta: 'Talk to sales',
+    name: 'Trial',
+    price: 'Start free',
+    blurb: 'Try NutaPOS with one shop. See sales, stock, and staff on the phone app and Management Hub.',
+    cta: 'Start free trial',
     featured: false,
-    action: 'mailto' as const,
-    mailtoSubject: 'Sales inquiry — Starter',
+    action: 'signup' as const,
+    note: '1 shop',
   },
   {
-    name: 'Growth',
+    name: 'Pro',
     price: 'Contact us',
-    blurb: 'For expanding inventory management needs, more staff, and tighter operational visibility.',
-    cta: 'Start for free',
+    blurb: 'For growing businesses — up to three shops, more staff, and tighter control of stock and discounts.',
+    cta: 'Talk to sales',
     featured: true,
-    action: 'signup' as const,
+    action: 'mailto' as const,
+    mailtoSubject: 'Sales inquiry — Pro',
+    note: 'Up to 3 shops',
   },
   {
     name: 'Enterprise',
     price: 'Contact us',
-    blurb: 'For multi-site business, advanced controls, and tailored rollout support across Africa.',
+    blurb: 'For larger networks — unlimited shops, custom setup, and support that matches how you operate.',
     cta: 'Contact us',
     featured: false,
     action: 'mailto' as const,
     mailtoSubject: 'Sales inquiry — Enterprise',
+    note: 'Unlimited shops',
   },
 ];
 ---
@@ -34,10 +37,10 @@ const tiers = [
 <section id="pricing" class="scroll-mt-28 px-4 py-20 md:px-6 md:py-28" aria-labelledby="pricing-heading">
   <div class="mx-auto max-w-6xl">
     <div class="max-w-3xl" data-reveal>
-      <h2 id="pricing-heading" class="section-title">Simple pricing, serious value</h2>
+      <h2 id="pricing-heading" class="section-title">Plans that grow with your shops</h2>
       <p class="section-sub">
-        Transparent tiers-placeholder numbers ship later. The goal is clarity: pick a lane, move fast, and scale your
-        cloud POS system without a maze of add-ons.
+        Start with one shop on trial. Move to Pro or Enterprise when you need more branches. We will help you pick what
+        fits.
       </p>
     </div>
 
@@ -60,6 +63,7 @@ const tiers = [
               </span>
             )}
             <h3 class="text-lg font-medium tracking-tight text-surface-900">{t.name}</h3>
+            <p class="mt-1 text-sm text-muted">{t.note}</p>
             <p class="mt-4 text-3xl font-medium tracking-tight text-surface-900">{t.price}</p>
             <p class="mt-4 flex-1 text-[15px] leading-relaxed text-muted">{t.blurb}</p>
             {t.action === 'signup' ? (

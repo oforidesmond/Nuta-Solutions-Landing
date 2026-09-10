@@ -1,23 +1,201 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SUPPORT_EMAIL, PHONE_DISPLAY, mailtoHref, telHref } from '@/lib/contact';
 
 const title = 'Terms of Service';
 const description =
-  'Terms governing use of NutaSolutions websites and NutaPOS. Placeholder terms-replace with legal review before production.';
+  'Terms governing use of NutaSolutions websites and NutaPOS, including accounts, Customer Content, and Ghana governing law.';
+const lastUpdated = 'September 10, 2026';
 ---
 
 <BaseLayout title={title} description={description} canonicalPath="/terms">
   <article class="mx-auto max-w-3xl px-4 pb-24 pt-32 md:px-6 md:pt-36">
     <h1 class="text-4xl font-medium tracking-tight text-surface-900">Terms of Service</h1>
-    <p class="mt-4 text-muted">Last updated: April 5, 2026</p>
-    <div class="mt-10 max-w-none text-[17px] leading-relaxed">
-      <p class="text-muted">
-        This page is a placeholder. Replace this content with terms appropriate for your entity, product, and regions.
+    <p class="mt-4 text-muted">Last updated: {lastUpdated}</p>
+    <div class="mt-10 max-w-none space-y-3 text-[17px] leading-relaxed text-muted">
+      <p>
+        These Terms of Service (“Terms”) form a binding agreement between you and NutaSolutions (“NutaSolutions,” “we,”
+        “us,” or “our”) governing access to and use of our websites, NutaPOS, and related services (the “Services”).
       </p>
-      <h2 class="mt-10 text-2xl font-medium tracking-tight">Agreement</h2>
-      <p class="mt-3 text-muted">
-        By accessing NutaSolutions websites or using NutaPOS, you agree to the final terms published here. This stub is not
-        legal advice.
+      <p>
+        By accessing the Services, creating an account, or clicking to accept these Terms, you agree to them. If you use
+        the Services on behalf of a business, you represent that you have authority to bind that business, and “you”
+        includes that business.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">1. The Services</h2>
+      <p>
+        NutaPOS is a cloud point-of-sale and business management platform for sales, inventory, bookkeeping, staff
+        access, audits, and related operations. Features may evolve over time. Marketing materials describe intended
+        capabilities; the Services available to your account are those enabled for your plan and configuration.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">2. Accounts and eligibility</h2>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>You must provide accurate signup and business information and keep it up to date.</li>
+        <li>You are responsible for safeguarding credentials and for activity under your account and user seats.</li>
+        <li>Notify us promptly of unauthorised access or suspected compromise.</li>
+        <li>
+          You must be able to form a binding contract under applicable law (typically 18 years or older, or acting
+          through a duly authorised representative).
+        </li>
+      </ul>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">3. Plans, fees, and taxes</h2>
+      <p>
+        We offer plan tiers (such as Starter, Growth, and Enterprise) that may begin with a free start, sales-led
+        onboarding, or custom pricing. Fees, billing cadence, and included features are as agreed in an order form,
+        invoice, or written quote, or as displayed at signup when self-serve pricing is available.
+      </p>
+      <p>
+        Unless stated otherwise, fees are quoted in Ghanaian cedi (GHS) or another currency we specify, and are
+        exclusive of applicable taxes (including VAT). You are responsible for taxes arising from your purchase, except
+        taxes based on our net income. Late or failed payment may result in suspension after reasonable notice.
+      </p>
+      <p>
+        We do not currently process card payments on the marketing website. When payment providers are introduced, their
+        terms and our billing practices will apply as disclosed at checkout or in your order.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">4. Licence and acceptable use</h2>
+      <p>
+        Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable right to access and
+        use the Services for your internal business operations during your subscription.
+      </p>
+      <p>You must not:</p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>Use the Services for unlawful purposes or to process illegal goods or transactions</li>
+        <li>Probe, scan, or disrupt the Services, or attempt to bypass security or access controls</li>
+        <li>Reverse engineer the software except to the extent such restriction is prohibited by law</li>
+        <li>Resell, sublicense, or provide the Services to third parties as a competing offering without our consent</li>
+        <li>Scrape or harvest data from the Services in a way that harms performance or violates others’ rights</li>
+        <li>Upload malware or content that infringes intellectual property or privacy rights</li>
+      </ul>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">5. Customer Content</h2>
+      <p>
+        “Customer Content” means data you and your authorised users submit to or generate in NutaPOS, including sales
+        and inventory records, bookkeeping data, staff profiles, audit information, and any end-customer information
+        captured in your operations.
+      </p>
+      <p>
+        You retain ownership of Customer Content. You grant NutaSolutions a worldwide licence to host, store, process,
+        transmit, and display Customer Content solely as needed to provide, secure, and improve the Services and as
+        otherwise directed by you.
+      </p>
+      <p>
+        You are responsible for the legality of Customer Content and for providing any required notices and obtaining
+        any required consents from your staff, end customers, and other data subjects under the Data Protection Act,
+        2012 (Act 843) and other applicable laws.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">6. Processing of Customer Content</h2>
+      <p>
+        For Customer Content, you are the data controller and NutaSolutions is a data processor. We will process
+        Customer Content only to provide the Services, in accordance with these Terms and your documented instructions
+        (including configuration and use of the product), and applicable law.
+      </p>
+      <p>
+        We will maintain appropriate confidentiality and security measures, and may engage subprocessors (such as cloud
+        hosting providers) to support delivery of the Services. We remain responsible for subprocessors’ performance
+        insofar as they process Customer Content on our behalf.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">7. Availability and support</h2>
+      <p>
+        We aim to keep the Services available and reliable using commercially reasonable efforts. Scheduled maintenance,
+        updates, or events beyond our reasonable control may cause interruptions. Unless a separate service level
+        agreement says otherwise, we do not guarantee uninterrupted or error-free operation.
+      </p>
+      <p>
+        Support is available through
+        <a href={mailtoHref('Support request')} class="text-brand-600 hover:text-brand-700">{SUPPORT_EMAIL}</a>
+        and
+        <a href={telHref()} class="text-brand-600 hover:text-brand-700">{PHONE_DISPLAY}</a>,
+        subject to your plan.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">8. Intellectual property</h2>
+      <p>
+        NutaSolutions and its licensors own all rights in the Services, software, documentation, branding, and related
+        intellectual property. These Terms do not transfer ownership to you. Feedback you provide may be used by us
+        without obligation to you.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">9. Third-party services</h2>
+      <p>
+        The Services may link to or integrate with third-party products. Those products are governed by their own terms
+        and privacy policies. We are not responsible for third-party services we do not control.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">10. Disclaimers</h2>
+      <p>
+        To the maximum extent permitted by Ghana law, the Services are provided “as is” and “as available,” without
+        warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that
+        the Services will meet all of your business requirements or that data will never be lost; you should maintain
+        appropriate backups and internal controls for your operations.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">11. Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by law, NutaSolutions will not be liable for indirect, incidental, special,
+        consequential, or punitive damages, or for lost profits, revenue, goodwill, or data, arising from or related to
+        the Services or these Terms.
+      </p>
+      <p>
+        Our aggregate liability for all claims relating to the Services in any twelve-month period will not exceed the
+        amounts you paid to NutaSolutions for the Services in that period (or, if you are on a free plan with no fees
+        paid, GHS 500). Nothing in these Terms excludes liability that cannot be limited under Ghana law.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">12. Indemnity</h2>
+      <p>
+        You will defend and indemnify NutaSolutions against claims, losses, and expenses (including reasonable legal
+        fees) arising from Customer Content, your misuse of the Services, your violation of these Terms, or your
+        violation of third-party rights or applicable law in connection with your business use of NutaPOS.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">13. Suspension and termination</h2>
+      <p>
+        You may stop using the Services at any time. We may suspend or terminate access if you materially breach these
+        Terms, fail to pay fees when due, create risk to the Services or others, or if we are required to do so by law.
+      </p>
+      <p>
+        Upon termination, your licence ends. We will make Customer Content available for export for a reasonable period
+        (typically up to 30 days) upon written request, after which we may delete it from active systems in accordance
+        with our Privacy Policy, subject to legal retention requirements and backup cycles.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">14. Governing law and disputes</h2>
+      <p>
+        These Terms are governed by the laws of the Republic of Ghana. Courts located in Ghana have exclusive
+        jurisdiction over disputes arising from these Terms or the Services, without prejudice to any non-waivable
+        consumer or statutory rights that may apply.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">15. Changes to these Terms</h2>
+      <p>
+        We may update these Terms from time to time. The “Last updated” date will change when we do. Material changes
+        may be communicated by email or in-product notice. Continued use after the effective date constitutes
+        acceptance of the updated Terms where permitted by law. If you do not agree, you must stop using the Services.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">16. General</h2>
+      <p>
+        These Terms, together with the Privacy Policy and any order form or quote we both accept, are the entire
+        agreement regarding the Services and supersede prior conflicting discussions on the same subject. If a
+        provision is unenforceable, the remainder stays in effect. You may not assign these Terms without our consent;
+        we may assign them in connection with a corporate reorganisation or sale of assets. Failure to enforce a
+        provision is not a waiver.
+      </p>
+
+      <h2 class="!mt-10 text-2xl font-medium tracking-tight text-surface-900">17. Contact</h2>
+      <p>
+        NutaSolutions<br />
+        Email:
+        <a href={mailtoHref('Terms inquiry')} class="text-brand-600 hover:text-brand-700">{SUPPORT_EMAIL}</a><br />
+        Phone:
+        <a href={telHref()} class="text-brand-600 hover:text-brand-700">{PHONE_DISPLAY}</a>
       </p>
     </div>
   </article>

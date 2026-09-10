@@ -3,13 +3,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import ProblemSolution from '@/components/sections/ProblemSolution.astro';
 import Features from '@/components/sections/Features.astro';
+import Partners from '@/components/sections/Partners.astro';
 import Trust from '@/components/sections/Trust.astro';
 import Pricing from '@/components/sections/Pricing.astro';
 import FinalCta from '@/components/sections/FinalCta.astro';
 
-const title = 'NutaPOS - Cloud POS & management for modern businesses';
+const title = 'NutaPOS — Point of sale and shop management for Ghana';
 const description =
-  'Run inventory, sales, bookkeeping, staff, and insights in one system. NutaPOS is a cloud POS system for Africa and Ghana businesses-management software with real-time stock alerts and enterprise-grade trust.';
+  'Sell offline, track stock and expiry, take Mobile Money, and see your shop from your phone. NutaPOS is built for shops and wholesale businesses in Ghana.';
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
 const jsonLd = {
@@ -23,10 +24,10 @@ const jsonLd = {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'GHS',
-    description: 'Contact for Growth and Enterprise tiers',
+    description: 'Free trial available; contact for Pro and Enterprise',
   },
   description:
-    'NutaPOS is a point-of-sale and inventory management system for businesses, with cloud storage, audit-friendly workflows, and role-based access.',
+    'NutaPOS is a point-of-sale and shop management system for Ghana, with offline selling, stock and expiry tracking, Mobile Money, and multi-branch support.',
   provider: {
     '@type': 'Organization',
     name: 'NutaSolutions',
@@ -40,6 +41,7 @@ const jsonLd = {
   <Hero />
   <ProblemSolution />
   <Features />
+  <Partners />
   <Trust />
   <Pricing />
   <FinalCta />
