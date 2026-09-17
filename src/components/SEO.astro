@@ -21,6 +21,8 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
 const canonical = `${site}${canonicalPath === '/' ? '' : canonicalPath}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${site}${ogImage}`;
 const pageTitle = title.includes('NutaSolutions') ? title : `${title} | NutaSolutions`;
+const ogImageAlt =
+  'NutaPOS by NutaSolutions — point of sale and shop management, built with Ghanaian businesses in mind';
 ---
 
 <meta charset="utf-8" />
@@ -28,13 +30,27 @@ const pageTitle = title.includes('NutaSolutions') ? title : `${title} | NutaSolu
 <link rel="canonical" href={canonical} />
 <meta name="description" content={description} />
 <meta name="generator" content={Astro.generator} />
-{noindex && <meta name="robots" content="noindex, follow" />}
+<meta http-equiv="content-language" content="en-GH" />
+{
+  noindex ? (
+    <meta name="robots" content="noindex, follow" />
+  ) : (
+    <meta name="robots" content="index, follow" />
+  )
+}
+<meta
+  name="keywords"
+  content="POS system Ghana, point of sale Ghana, shop POS Ghana, inventory software Ghana, point of sale, shop POS, inventory software, NutaPOS, NutaSolutions"
+/>
 
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content={ogType} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
 <meta property="og:site_name" content="NutaSolutions" />
 <meta property="og:locale" content="en_GH" />
 
@@ -42,6 +58,7 @@ const pageTitle = title.includes('NutaSolutions') ? title : `${title} | NutaSolu
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 <meta name="theme-color" content="#2B26FF" />
 

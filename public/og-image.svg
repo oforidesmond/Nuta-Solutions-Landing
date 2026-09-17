@@ -7,7 +7,7 @@
       <stop offset="1" stop-color="#fafbfc"/>
     </linearGradient>
   </defs>
-  <g transform="translate(420 195)">
+  <g transform="translate(420 175)">
     <rect x="0" y="0" width="96" height="96" rx="26" fill="#2B26FF"/>
     <rect x="112" y="0" width="96" height="96" rx="26" fill="#0a0a0b"/>
     <rect x="224" y="0" width="96" height="96" rx="26" fill="#0a0a0b"/>
@@ -15,6 +15,7 @@
     <rect x="224" y="112" width="96" height="96" rx="26" fill="#0a0a0b"/>
     <rect x="112" y="224" width="96" height="96" rx="26" fill="#0a0a0b"/>
   </g>
-  <text x="600" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-size="42" font-weight="500" fill="#0a0a0b">TradePulse · PulsePOS</text>
-  <text x="600" y="470" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#5c6370">Cloud POS &amp; retail management</text>
+  <text x="600" y="460" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#5c6370">Point of sale &amp; shop management</text>
+  <text x="600" y="510" text-anchor="middle" font-family="system-ui, sans-serif" font-size="42" font-weight="500" fill="#0a0a0b">NutaPOS · NutaSolutions</text>
+  <text x="600" y="555" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" fill="#5c6370">Built with Ghanaian businesses in mind · ready anywhere</text>
 </svg>

@@ -6,33 +6,87 @@ import Features from '@/components/sections/Features.astro';
 import Partners from '@/components/sections/Partners.astro';
 import Trust from '@/components/sections/Trust.astro';
 import Pricing from '@/components/sections/Pricing.astro';
+import Faq from '@/components/sections/Faq.astro';
 import FinalCta from '@/components/sections/FinalCta.astro';
+import { nutaposFaqs } from '@/data/faq';
 
-const title = 'NutaPOS — Point of sale and shop management for Ghana';
+const title = 'NutaPOS — Point of sale and shop management';
 const description =
-  'Sell offline, track stock and expiry, take Mobile Money, and see your shop from your phone. NutaPOS is built for shops and wholesale businesses in Ghana.';
+  'Sell offline, track stock and expiry, take Mobile Money, and see your shop from your phone. NutaPOS is a POS system and inventory software built with Ghanaian businesses in mind — ready for shops and retailers anywhere.';
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'NutaPOS',
-  url: site ? `${site}/` : undefined,
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'GHS',
-    description: 'Free trial available; contact for Pro and Enterprise',
-  },
-  description:
-    'NutaPOS is a point-of-sale and shop management system for Ghana, with offline selling, stock and expiry tracking, Mobile Money, and multi-branch support.',
-  provider: {
-    '@type': 'Organization',
-    name: 'NutaSolutions',
-    url: site || undefined,
-  },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': site ? `${site}/#organization` : undefined,
+      name: 'NutaSolutions',
+      url: site || undefined,
+      logo: site ? `${site}/favicon.svg` : undefined,
+      description:
+        'NutaSolutions builds NutaPOS and custom web apps. Primary market: Ghana. Ready for shops and businesses worldwide.',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': site ? `${site}/#website` : undefined,
+      url: site ? `${site}/` : undefined,
+      name: 'NutaSolutions',
+      description:
+        'Point of sale and shop management — POS system Ghana shops trust, usable by retailers anywhere.',
+      publisher: { '@id': site ? `${site}/#organization` : undefined },
+      inLanguage: 'en-GH',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': site ? `${site}/#nutapos` : undefined,
+      name: 'NutaPOS',
+      url: site ? `${site}/` : undefined,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web, Android',
+      description:
+        'NutaPOS is point-of-sale and inventory software for shops and wholesale businesses. Built with Ghanaian businesses in mind, ready for retailers anywhere. Offline selling, stock and expiry tracking, Mobile Money, and multi-branch support.',
+      featureList: [
+        'Offline point of sale',
+        'Stock and expiry tracking',
+        'Mobile Money and mixed payments',
+        'Multi-branch shop management',
+        'Staff roles and alerts',
+      ],
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: '0',
+        priceCurrency: 'GHS',
+        offerCount: 3,
+        description: 'Free trial available; contact for Pro and Enterprise',
+      },
+      areaServed: [
+        {
+          '@type': 'Country',
+          name: 'Ghana',
+        },
+        {
+          '@type': 'Place',
+          name: 'Worldwide',
+          description: 'Available to shops and businesses beyond Ghana; local tax and payment setup may vary by market.',
+        },
+      ],
+      provider: { '@id': site ? `${site}/#organization` : undefined },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': site ? `${site}/#faq` : undefined,
+      mainEntity: nutaposFaqs.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+    },
+  ],
 };
 ---
 
@@ -44,5 +98,6 @@ const jsonLd = {
   <Partners />
   <Trust />
   <Pricing />
+  <Faq />
   <FinalCta />
 </BaseLayout>

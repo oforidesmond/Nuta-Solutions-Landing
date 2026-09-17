@@ -1,0 +1,35 @@
+---
+import { nutaposFaqs } from '@/data/faq';
+---
+
+<section id="faq" class="scroll-mt-28 px-4 py-20 md:px-6 md:py-28" aria-labelledby="faq-heading">
+  <div class="mx-auto max-w-3xl">
+    <div class="max-w-2xl" data-reveal>
+      <h2 id="faq-heading" class="section-title">Questions about NutaPOS</h2>
+      <p class="section-sub">
+        Point of sale and inventory software for shops — trusted in Ghana, ready for businesses anywhere.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-3" data-reveal>
+      {
+        nutaposFaqs.map((item) => (
+          <details class="group rounded-2xl border border-surface-200/90 bg-white/70 px-5 py-4 open:bg-white">
+            <summary class="cursor-pointer list-none text-[17px] font-medium tracking-tight text-surface-900 marker:content-none [&::-webkit-details-marker]:hidden">
+              <span class="flex items-start justify-between gap-4">
+                <span>{item.q}</span>
+                <span
+                  class="mt-0.5 shrink-0 text-muted transition group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </span>
+            </summary>
+            <p class="mt-3 max-w-prose text-[15px] leading-relaxed text-muted">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
